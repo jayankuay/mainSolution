@@ -2,7 +2,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import csv
 
-
+commit = 0
 def highest_overhead_expense(file):
     """
     Will find the highest overhead expense incurred over 90 day period of running the business
@@ -10,7 +10,7 @@ def highest_overhead_expense(file):
 
     highest_expense = 0
     highest_overhead = 0
-    
+
     fp = Path.cwd()/"Overheads.csv"
     with fp.open(mode="r", encoding="UTF-8", newline="") as file:
         reader = csv.reader(file)
@@ -30,8 +30,7 @@ file_path.touch()
 
 with file_path.open(mode = "w", encoding = "UTF-8") as file:
     file.write(f"[HIGHEST OVERHEAD] {highest_overhead_report[0]}: {highest_overhead_report[1]}%")
-
-
+print(highest_overhead_report)
 #    salary_expense = []
 #    interest_expense = []
 #    marketing_expense = []
