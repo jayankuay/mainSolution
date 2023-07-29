@@ -2,34 +2,49 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import csv
 
-def cash_difference():
+def cash_difference(file):
     """
     - Calculate the difference in the cash on hand
     """
-    day_of_cash_on_hand = 0
     current_cash_on_hand = 0
     previous_cash_on_hand = 0
     total_difference = 0
-    difference = 0
-    total_difference_list = 0
-    fp = Path.cwd()/"cash_on_hand.py"
+    #highest_surplus = 0
+    #highest_surplus_day = 0
+    cash_deficit = 0
+    cash_deficit_day = 0
+    fp = Path.cwd()/"Cash on Hand.csv"
     with fp.open(mode="r",encoding="UTF-8",newline="") as file:
         reader = csv.reader(file)
         next(reader)
+        previous_cash_on_hand = 0
         for row in reader:
-            if difference[1] < difference[row-1]:
-                total_difference = difference[row-1] - difference[1]
-                total_difference_list.append(total_difference)
-        return[total_difference_list]
+            #current_cash_on_hand = float(row[1])
+            #if previous_cash_on_hand > 0 and current_cash_on_hand > previous_cash_on_hand:
+            #    total_difference = current_cash_on_hand - previous_cash_on_hand
+            #previous_cash_on_hand = current_cash_on_hand
+            #if total_difference > highest_surplus:
+            #    highest_surplus =  total_difference
+            #    highest_surplus_day = row[0]
+            current_cash_on_hand = float(row[1])
+            if previous_cash_on_hand > 0 and current_cash_on_hand < previous_cash_on_hand:
+                cash_deficit = previous_cash_on_hand - current_cash_on_hand
+                cash_deficit_day = row[0]
+            previous_cash_on_hand = current_cash_on_hand
+
     
-highest_difference_report = cash_difference['cash_on_hand.py']
+        return [cash_deficit_day, cash_deficit]    
+highest_difference_report = cash_difference('cash_on_hand.py')
 
 file_path = Path.cwd() / "summary_report.txt"
 file_path.touch()
     
 with file_path.open(mode = "w", encoding = "UTF-8") as file:
-    file.write(f"[Highest increment]=$ {highest_difference_report[1]}")
-
+    #for highest_surplus_day, highest_surplus in highest_difference_report:
+        #if highest_surplus > 0:
+            #file.write(f"[HIGHEST CASH SURPLUS] DAY: {highest_difference_report[0]}, AMOUNT: {highest_difference_report[1]}\n")
+        #if highest_difference_report[1] < 0:
+    file.write(f"[CASH DEFICIT] DAY: {highest_difference_report[0]}, AMOUNT: {highest_difference_report[1]}")
 
     
   
