@@ -2,23 +2,29 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import csv
 
-def highest_overhead_expense(file):
+fp = Path.cwd()/"Overheads.csv"
+with fp.open(mode="r", encoding="UTF-8", newline="") as file:
+    reader = csv.reader(file)
+    next(reader)
+
+    overheads = []
+
+    for row in reader:
+        overheads.append(row)
+        
+
+def highest_overhead_expense(expense):
     """
     Will find the highest overhead expense incurred over 90 day period of running the business
     """
 
     highest_expense = 0
     highest_overhead = 0
-
-    fp = Path.cwd()/"Overheads.csv"
-    with fp.open(mode="r", encoding="UTF-8", newline="") as file:
-        reader = csv.reader(file)
-        next(reader)
-        for row in reader:
-            overhead = float(row[1])
-            if overhead > highest_overhead:
+    for value in expense:
+        overhead = float([value][1])
+        if overhead > highest_overhead:
                 highest_overhead = overhead
-                highest_expense = row[0]
+                highest_expense = value[0]
 
     return [highest_expense, highest_overhead]
 
