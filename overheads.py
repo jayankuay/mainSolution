@@ -21,14 +21,14 @@ def highest_overhead_expense(expense):
     highest_expense = 0
     highest_overhead = 0
     for value in expense:
-        overhead = float([value][1])
+        overhead = float(value[1])
         if overhead > highest_overhead:
                 highest_overhead = overhead
                 highest_expense = value[0]
 
     return [highest_expense, highest_overhead]
 
-highest_overhead_report = highest_overhead_expense('Overheads.csv')   
+highest_overhead_report = highest_overhead_expense(overheads)   
 
 file_path = Path.cwd()/"summary_report.txt"
 file_path.touch()

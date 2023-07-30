@@ -18,12 +18,9 @@ def cash_difference(cash_on_hand):
     """
     current_cash_on_hand = 0
     previous_cash_on_hand = 0
-    #highest_surplus = 0
-    #highest_surplus_day = 0
     cash_deficit = 0
     cash_deficit_day = 0
-    value = 0
-    cash_deficits = []
+    cash_deficits_list = []
             #current_cash_on_hand = float(row[1])
             #if previous_cash_on_hand > 0 and current_cash_on_hand > previous_cash_on_hand:
             #    total_difference = current_cash_on_hand - previous_cash_on_hand
@@ -36,16 +33,16 @@ def cash_difference(cash_on_hand):
             #    cash_deficit = previous_cash_on_hand - current_cash_on_hand
             #    cash_deficit_day = row[0]
             #previous_cash_on_hand = current_cash_on_hand  
-    for value in range(1, len(cash_on_hand)):
-        previous_cash_on_hand = float(cash_on_hand[value][1])
-        current_cash_on_hand = float(cash_on_hand[value][1])
-        value += 1
-        if previous_cash_on_hand > current_cash_on_hand:
+    for value in cash_on_hand:
+        current_cash_on_hand = float(value[1])
+        if current_cash_on_hand > previous_cash_on_hand:
+            previous_cash_on_hand = current_cash_on_hand
+        elif current_cash_on_hand < previous_cash_on_hand:
             cash_deficit = previous_cash_on_hand - current_cash_on_hand
-            cash_deficit_day = float(cash_on_hand[value][0])
-            cash_deficits.append(cash_deficit_day, cash_deficit)
+            cash_deficit_day = float(value[0])
+            cash_deficits_list.append((cash_deficit_day, cash_deficit))
         previous_cash_on_hand = current_cash_on_hand
-    return cash_deficits
+    return cash_deficits_list
     
 highest_difference_report = cash_difference(cash_on_hand_data)
 
@@ -57,8 +54,8 @@ with file_path.open(mode = "w", encoding = "UTF-8") as file:
         #if highest_surplus > 0:
             #file.write(f"[HIGHEST CASH SURPLUS] DAY: {highest_difference_report[0]}, AMOUNT: {highest_difference_report[1]}\n")
         #if highest_difference_report[1] < 0:
-    file.write(f"[CASH DEFICIT] DAY: {highest_difference_report}, AMOUNT: {highest_difference_report[1]}")
-
+    for day, deficit in highest_difference_report:
+        file.write(f"[CASH DEFICIT] DAY: {day}, AMOUNT: {deficit}\n")
     
   
     
