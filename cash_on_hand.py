@@ -45,7 +45,7 @@ def cash_difference(cash_on_hand):
     return cash_deficits_list
     
 highest_difference_report = cash_difference(cash_on_hand_data)
-
+print(highest_difference_report)
 file_path = Path.cwd() / "summary_report.txt"
 file_path.touch()
     
@@ -54,7 +54,7 @@ with file_path.open(mode = "w", encoding = "UTF-8") as file:
         #if highest_surplus > 0:
             #file.write(f"[HIGHEST CASH SURPLUS] DAY: {highest_difference_report[0]}, AMOUNT: {highest_difference_report[1]}\n")
         #if highest_difference_report[1] < 0:
-    for day, deficit in highest_difference_report:
+    for (day, deficit) in highest_difference_report:
         file.write(f"[CASH DEFICIT] DAY: {day}, AMOUNT: {deficit}\n")
     
   
