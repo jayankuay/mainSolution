@@ -24,7 +24,7 @@ def highest_overhead_expense(expense):
         overhead = float(value[1])
         if overhead > highest_overhead:
             highest_overhead = overhead
-            highest_expense = value[0].replace
+            highest_expense = value[0]
 
     return [highest_expense, highest_overhead]
 
