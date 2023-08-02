@@ -2,55 +2,56 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import csv
 
-fp = Path.cwd()/"Cash on Hand.csv"
-with fp.open(mode="r",encoding="UTF-8",newline="") as file:
-    reader = csv.reader(file)
-    next(reader)
+def cashonhand_function():
+    fp = Path.cwd()/"Cash on Hand.csv"
+    with fp.open(mode="r",encoding="UTF-8",newline="") as file:
+        reader = csv.reader(file)
+        next(reader)
 
-    cash_on_hand_data = []
+        cash_on_hand_data = []
     
-    for row in reader:
-        cash_on_hand_data.append(row)
+        for row in reader:
+            cash_on_hand_data.append(row)
 
-def cash_difference(cash_on_hand):
-    """
-    - Calculate the difference in the cash on hand
-    """
-    current_cash_on_hand = 0
-    previous_cash_on_hand = 0
-    cash_deficit = 0
-    cash_deficit_day = 0
-    cash_deficits_list = []
-            #current_cash_on_hand = float(row[1])
-            #if previous_cash_on_hand > 0 and current_cash_on_hand > previous_cash_on_hand:
-            #    total_difference = current_cash_on_hand - previous_cash_on_hand
-            #previous_cash_on_hand = current_cash_on_hand
-            #if total_difference > highest_surplus:
-            #    highest_surplus =  total_difference
-            #    highest_surplus_day = row[0]
-            #current_cash_on_hand = float(row[1])
-            #if previous_cash_on_hand > 0 and current_cash_on_hand < previous_cash_on_hand:
-            #    cash_deficit = previous_cash_on_hand - current_cash_on_hand
-            #    cash_deficit_day = row[0]
-            #previous_cash_on_hand = current_cash_on_hand  
-    for value in cash_on_hand:
-        current_cash_on_hand = float(value[1])
-        if current_cash_on_hand > previous_cash_on_hand:
+    def cash_difference(cash_on_hand):
+        """
+        - Calculate the difference in the cash on hand
+        """
+        current_cash_on_hand = 0
+        previous_cash_on_hand = 0
+        cash_deficit = 0
+        cash_deficit_day = 0
+        cash_deficits_list = []
+                #current_cash_on_hand = float(row[1])
+                #if previous_cash_on_hand > 0 and current_cash_on_hand > previous_cash_on_hand:
+                #    total_difference = current_cash_on_hand - previous_cash_on_hand
+                #previous_cash_on_hand = current_cash_on_hand
+                #if total_difference > highest_surplus:
+                #    highest_surplus =  total_difference
+                #    highest_surplus_day = row[0]
+                #current_cash_on_hand = float(row[1])
+                #if previous_cash_on_hand > 0 and current_cash_on_hand < previous_cash_on_hand:
+                #    cash_deficit = previous_cash_on_hand - current_cash_on_hand
+                #    cash_deficit_day = row[0]
+                #previous_cash_on_hand = current_cash_on_hand  
+        for value in cash_on_hand:
+            current_cash_on_hand = float(value[1])
+            if current_cash_on_hand > previous_cash_on_hand:
+                previous_cash_on_hand = current_cash_on_hand
+            elif current_cash_on_hand < previous_cash_on_hand:
+                cash_deficit = previous_cash_on_hand - current_cash_on_hand
+                cash_deficit_day = float(value[0])
+                cash_deficits_list.append((cash_deficit_day, cash_deficit))
             previous_cash_on_hand = current_cash_on_hand
-        elif current_cash_on_hand < previous_cash_on_hand:
-            cash_deficit = previous_cash_on_hand - current_cash_on_hand
-            cash_deficit_day = float(value[0])
-            cash_deficits_list.append((cash_deficit_day, cash_deficit))
-        previous_cash_on_hand = current_cash_on_hand
-    return cash_deficits_list
+        return cash_deficits_list
     
-highest_difference_report = cash_difference(cash_on_hand_data)
-file_path = Path.cwd() / "summary_report.txt"
-file_path.touch()
+    highest_difference_report = cash_difference(cash_on_hand_data)
+    file_path = Path.cwd() / "summary_report.txt"
+    file_path.touch()
     
-with file_path.open(mode = "w", encoding = "UTF-8") as file:
-    for (day, deficit) in highest_difference_report:
-        file.write(f"[CASH DEFICIT] DAY: {day}, AMOUNT: {deficit}\n")
+    with file_path.open(mode = "a", encoding = "UTF-8") as file:
+        for (day, deficit) in highest_difference_report:
+            file.write(f"[CASH DEFICIT] DAY: {day}, AMOUNT: {deficit}\n")
     
   
     
