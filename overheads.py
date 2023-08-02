@@ -2,39 +2,40 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import csv
 
-fp = Path.cwd()/"Overheads Data.csv"
-with fp.open(mode="r", encoding="UTF-8", newline="") as file:
-    reader = csv.reader(file)
-    next(reader)
+def overhead_function(): 
+    fp = Path.cwd()/"Overheads Data.csv"
+    with fp.open(mode="r", encoding="UTF-8", newline="") as file:
+        reader = csv.reader(file)
+        next(reader)
 
-    overheads = []
+        overheads = []
 
-    for row in reader:
-        overheads.append(row)
+        for row in reader:
+            overheads.append(row)
         
 
-def highest_overhead_expense(expense):
-    """
-    Will find the highest overhead expense incurred over 90 day period of running the business
-    """
+    def highest_overhead_expense(expense):
+        """
+        Will find the highest overhead expense incurred over 90 day period of running the business
+        """
 
-    highest_expense = 0
-    highest_overhead = 0
-    for value in expense:
-        overhead = float(value[1])
-        if overhead > highest_overhead:
-            highest_overhead = overhead
-            highest_expense = value[0]
+        highest_expense = 0
+        highest_overhead = 0
+        for value in expense:
+            overhead = float(value[1])
+            if overhead > highest_overhead:
+                highest_overhead = overhead
+                highest_expense = value[0]
 
-    return [highest_expense, highest_overhead]
+        return [highest_expense, highest_overhead]
 
-highest_overhead_report = highest_overhead_expense(overheads)   
+    highest_overhead_report = highest_overhead_expense(overheads)   
 
-file_path = Path.cwd()/"summary_report.txt"
-file_path.touch()
+    file_path = Path.cwd()/"summary_report.txt"
+    file_path.touch()
 
-with file_path.open(mode = "w", encoding = "UTF-8") as file:
-    file.write(f"[HIGHEST OVERHEAD] {highest_overhead_report[0]}: {highest_overhead_report[1]}%")
+    with file_path.open(mode = "a", encoding = "UTF-8") as file:
+        file.write(f"[HIGHEST OVERHEAD] {highest_overhead_report[0]}: {highest_overhead_report[1]}%\n")
 # Ignore the below codes thanks
 #    salary_expense = []
 #    interest_expense = []
