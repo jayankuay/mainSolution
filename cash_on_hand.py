@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import csv
 
 def cashonhand_function():
-    fp = Path.cwd()/"Cash on Hand.csv"
+    fp = Path.cwd()/"Cash on Hand Data.csv"
     with fp.open(mode="r",encoding="UTF-8",newline="") as file:
         reader = csv.reader(file)
         next(reader)
