@@ -1,8 +1,8 @@
-import cash_on_hand, overheads, profit_loss
+import overheads, cash_on_hand, profit_loss
 
 def main():
-    cash_on_hand.cashonhand_function()
     overheads.overhead_function()
+    cash_on_hand.cashonhand_function()
     profit_loss.profitloss_function()
 
 main()
