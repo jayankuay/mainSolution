@@ -2,21 +2,27 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import csv
 
+# Write a function for cash on hand to be run and called out in mainsolution.py
+# Read the csv file to append profit and quantity from the csv.
 def cashonhand_function():
-    fp = Path.cwd()/"Cash on Hand Data.csv"
-    with fp.open(mode="r",encoding="UTF-8",newline="") as file:
+    fp = Path.cwd()/"Cash on Hand Data.csv" # Create file path to read cash on hand data in csv file
+    with fp.open(mode="r",encoding="UTF-8",newline="") as file: 
         reader = csv.reader(file)
-        next(reader)
+        next(reader)  # Skip header
 
+# Create empty list to store cash on hand by day respectively
         cash_on_hand_data = []
-    
+
         for row in reader:
             cash_on_hand_data.append(row)
 
+# Create a function that finds days experiencing cash on hand deficit over the 90 days
     def cash_difference(cash_on_hand):
         """
-        - Calculate the difference in the cash on hand
+        - Calculates the deficit in the cash on hand and finds the days experiencing cash on hand
+        deficit
         """
+        # Neutalise/clean the values by storing variables with value zero
         current_cash_on_hand = 0
         previous_cash_on_hand = 0
         cash_deficit = 0

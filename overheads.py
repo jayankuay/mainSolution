@@ -1,7 +1,7 @@
 from pathlib import Path
 import matplotlib.pyplot as plt
 import csv
-# write a function for overhead to be run in mainsolution.py
+# Write a function for overhead to be run and called out in mainsolution.py
 def overhead_function(): 
     fp = Path.cwd()/"Overheads Data.csv" # Create file path to read overheads data in csv file
     with fp.open(mode="r", encoding="UTF-8", newline="") as file:
@@ -23,7 +23,7 @@ def overhead_function():
         highest_overhead = 0
         for value in expense: # Use a for loop to run through every overhead expense and percentage
             overhead = float(value[1]) # Convert data from string to float
-            # Use if function to find when a looped overhead value is higher than current highest 
+            # Use if condition to find when a looped overhead value is higher than current highest 
             # overhead value
             if overhead > highest_overhead:
                 highest_overhead = overhead # When overhead value is higher than current highest 
