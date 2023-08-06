@@ -22,15 +22,17 @@ def overhead_function():
         highest_expense = 0
         highest_overhead = 0
         for value in expense: # Use a for loop to run through every overhead expense and percentage
-            overhead = float(value[1])
+            overhead = float(value[1]) # Convert data from string to float
+            # Use if function to find when a looped overhead value is higher than current highest 
+            # overhead value
             if overhead > highest_overhead:
-                highest_overhead = overhead
+                highest_overhead = overhead # When overhead value is higher than current highest 
+                                            # overhead, replace it and store it under 
+                                            # highest_overhead variable
                 highest_expense = value[0] # Call out highest expense name from the list with index
                                            # postion zero
-
         return [highest_expense, highest_overhead] # Get the data for highest expense and highest
                                                    # overhead percentage into a list
-
     highest_overhead_report = highest_overhead_expense(overheads)  # Use highest_overhead_report 
                                                                    # variable to store values
                                                                    # in the list
