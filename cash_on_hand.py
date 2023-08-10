@@ -28,7 +28,6 @@ def cashonhand_function():
         cash_deficit = 0
         cash_deficit_day = 0
         cash_deficits_list = []
-        # please ignore this first
                 #current_cash_on_hand = float(row[1])
                 #if previous_cash_on_hand > 0 and current_cash_on_hand > previous_cash_on_hand:
                 #    total_difference = current_cash_on_hand - previous_cash_on_hand
@@ -41,51 +40,59 @@ def cashonhand_function():
                 #    cash_deficit = previous_cash_on_hand - current_cash_on_hand
                 #    cash_deficit_day = row[0]
                 #previous_cash_on_hand = current_cash_on_hand  
-        # use 'for loop' to look throught the cash on hand csv file
-        # convert data into from string to float as money as decimal point
-        
-      
-        # add the deficit day and total amount of the cash deficit into the list
-        # use return as the function will send values back to the main program
-      
-        for value in cash_on_hand:
-            current_cash_on_hand = float(value[1])
-            if current_cash_on_hand > previous_cash_on_hand:
-                previous_cash_on_hand = current_cash_on_hand
-            elif current_cash_on_hand < previous_cash_on_hand:
-                cash_deficit = previous_cash_on_hand - current_cash_on_hand
-                cash_deficit_day = float(value[0])
-                cash_deficits_list.append((cash_deficit_day, cash_deficit))
-            previous_cash_on_hand = current_cash_on_hand
-        return cash_deficits_list
+        for value in cash_on_hand: # Use for loop to loop through all the values for cash on hand
+            current_cash_on_hand = float(value[1]) # Use float to convert current day cash on hand
+                                                   # from string
+            if current_cash_on_hand > previous_cash_on_hand: # Use if condition for when current cash 
+                                                             # on hand is more than previous
+                previous_cash_on_hand = current_cash_on_hand # store previous cash on hand as current
+            elif current_cash_on_hand < previous_cash_on_hand: # and if the next day current cash on
+                                                               # hand that is being looped to is lesser
+                                                               # than currently stored previous cash
+                                                               # on hand value
+                cash_deficit = previous_cash_on_hand - current_cash_on_hand # Calculate the deficit with
+                                                                            # the following formula
+                cash_deficit_day = float(value[0]) # The day experiencing the cash on hand deficit will
+                                                   # be stored in the variable
+                cash_deficits_list.append((cash_deficit_day, cash_deficit)) # Append all stored variables in 
+                                                                            # cash_deficit_day and 
+                                                                            # current_cash_on_hand variables
+                                                                            # to the empty cash_deficits_list
+            previous_cash_on_hand = current_cash_on_hand # Continue storing back currently looped 
+                                                         # current_cash_on_hand variable to the 
+                                                         # previous_cash_on_hand again so it is able
+                                                         # to continue looping through all values in
+                                                         # cash_on_hand_data list to find more
+                                                         # days experiencing deficits and get deficit 
+                                                         # values
+        return cash_deficits_list # Get back the variables in the list
     
-
-    # creating a general variable to store the total data
-    highest_difference_report = cash_difference(cash_on_hand_data)
-
-
-    # create a path to txt file
-    # use .cwd() to represent your current location in the file system 
-    # use .touch() to create a file(summary_.txt)
-    file_path = Path.cwd() / "summary_report.txt"
-    file_path.touch()
+    highest_difference_report = cash_difference(cash_on_hand_data) # Store tha variables in the list
+                                                                   # into another variable 
+                                                                   # highest_difference_report
+    file_path = Path.cwd() / "summary_report.txt" # The following below will write out the days 
+                                                  # experiencing cash deficit and the deficit amount 
+                                                  # for those days
+                                                  # Create a file path to where the text document file
+                                                  # region_report.txt is stored
+    file_path.touch() # Creates a new file in the file path created to the text document 
     
-
-    # write the txt file using the data in csv file 
-    # use 'with' statement to make the code cleaner and more readable
-    # use .open() to return the file
-    # using the mode="a" to append the all the data in one summary_report.txt.
-    # use encoding="UTF-8" to keep things simple
-    # use .write()method to write data in a plain text file
-    # use f string to print mutiple variable
     with file_path.open(mode = "a", encoding = "UTF-8") as file:
+        # Use mode "a" to append the data at the start of the text file
+        # Use f-strings in order to append the deficit days and deficit amount in the 
+        # highest_difference_report variable into the text file.     
+        # Iterate through the elements in the list stored in highest_difference_report variable to get
+        # the outputs for deficit days and deficit amount and inculde the USD sign for the
+        # cash deficit ouputs 
+        # Use for loop to call out the elements by representing each entry of elements in the list
+        # with day and deficit                          
         for (day, deficit) in highest_difference_report:
-            file.write(f"[CASH DEFICIT] DAY: {day}, AMOUNT: {deficit}\n")
+            file.write(f"[CASH DEFICIT] DAY: {day}, AMOUNT: USD{deficit}\n")
     
   
     
 
-# please ignore this first
+
 #def total_difference():
 #    """
 #    - To calculate the difference in cash on hand 

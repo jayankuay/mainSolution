@@ -39,7 +39,7 @@ def profitloss_function():
 
         with file_path.open(mode = "a", encoding = "UTF-8") as file:
             for (day, deficit_profit) in profit_loss_report:
-                file.write(f"[PROFIT DEFICIT] DAY: {day}, AMOUNT: {deficit_profit}\n")
+                file.write(f"[PROFIT DEFICIT] DAY: {day}, AMOUNT: USD{deficit_profit}\n")
              
             
     
