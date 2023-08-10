@@ -22,7 +22,7 @@ def cashonhand_function():
         - Calculates the deficit in the cash on hand and finds the days experiencing cash on hand
         deficit
         """
-        # Neutalise/clean the values by storing variables with value zero
+        # Neutralise/clean the values by storing variables with value zero
         current_cash_on_hand = 0
         previous_cash_on_hand = 0
         cash_deficit = 0
@@ -45,7 +45,10 @@ def cashonhand_function():
                                                    # from string
             if current_cash_on_hand > previous_cash_on_hand: # Use if condition for when current cash 
                                                              # on hand is more than previous
-                previous_cash_on_hand = current_cash_on_hand # store previous cash on hand as current
+                previous_cash_on_hand = current_cash_on_hand # store current cash on hand value as 
+                                                             # previous cash on hand to be able to 
+                                                             # calculate and loop through other 
+                                                             # days' cash on hand
             elif current_cash_on_hand < previous_cash_on_hand: # and if the next day current cash on
                                                                # hand that is being looped to is lesser
                                                                # than currently stored previous cash
@@ -54,10 +57,12 @@ def cashonhand_function():
                                                                             # the following formula
                 cash_deficit_day = float(value[0]) # The day experiencing the cash on hand deficit will
                                                    # be stored in the variable
-                cash_deficits_list.append((cash_deficit_day, cash_deficit)) # Append all stored variables in 
+                cash_deficits_list.append((cash_deficit_day, cash_deficit)) # Append all stored
+                                                                            # variables in 
                                                                             # cash_deficit_day and 
-                                                                            # current_cash_on_hand variables
-                                                                            # to the empty cash_deficits_list
+                                                                            # current_cash_on_hand 
+                                                                            # to the empty 
+                                                                            # cash_deficits_list
             previous_cash_on_hand = current_cash_on_hand # Continue storing back currently looped 
                                                          # current_cash_on_hand variable to the 
                                                          # previous_cash_on_hand again so it is able
@@ -67,14 +72,14 @@ def cashonhand_function():
                                                          # values
         return cash_deficits_list # Get back the variables in the list
     
-    highest_difference_report = cash_difference(cash_on_hand_data) # Store tha variables in the list
+    highest_difference_report = cash_difference(cash_on_hand_data) # Store the variables in the list
                                                                    # into another variable 
                                                                    # highest_difference_report
     file_path = Path.cwd() / "summary_report.txt" # The following below will write out the days 
                                                   # experiencing cash deficit and the deficit amount 
                                                   # for those days
                                                   # Create a file path to where the text document file
-                                                  # region_report.txt is stored
+                                                  # summary_report.txt is stored
     file_path.touch() # Creates a new file in the file path created to the text document 
     
     with file_path.open(mode = "a", encoding = "UTF-8") as file:
