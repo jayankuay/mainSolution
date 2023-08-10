@@ -28,6 +28,7 @@ def cashonhand_function():
         cash_deficit = 0
         cash_deficit_day = 0
         cash_deficits_list = []
+        # please ignore this first
                 #current_cash_on_hand = float(row[1])
                 #if previous_cash_on_hand > 0 and current_cash_on_hand > previous_cash_on_hand:
                 #    total_difference = current_cash_on_hand - previous_cash_on_hand
@@ -40,6 +41,13 @@ def cashonhand_function():
                 #    cash_deficit = previous_cash_on_hand - current_cash_on_hand
                 #    cash_deficit_day = row[0]
                 #previous_cash_on_hand = current_cash_on_hand  
+        # use 'for loop' to look throught the cash on hand csv file
+        # convert data into from string to float as money as decimal point
+        
+      
+        # add the deficit day and total amount of the cash deficit into the list
+        # use return as the function will send values back to the main program
+      
         for value in cash_on_hand:
             current_cash_on_hand = float(value[1])
             if current_cash_on_hand > previous_cash_on_hand:
@@ -51,10 +59,25 @@ def cashonhand_function():
             previous_cash_on_hand = current_cash_on_hand
         return cash_deficits_list
     
+
+    # creating a general variable to store the total data
     highest_difference_report = cash_difference(cash_on_hand_data)
+
+
+    # create a path to txt file
+    # use .cwd() to represent your current location in the file system 
+    # use .touch() to create a file(summary_.txt)
     file_path = Path.cwd() / "summary_report.txt"
     file_path.touch()
     
+
+    # write the txt file using the data in csv file 
+    # use 'with' statement to make the code cleaner and more readable
+    # use .open() to return the file
+    # using the mode="a" to append the all the data in one summary_report.txt.
+    # use encoding="UTF-8" to keep things simple
+    # use .write()method to write data in a plain text file
+    # use f string to print mutiple variable
     with file_path.open(mode = "a", encoding = "UTF-8") as file:
         for (day, deficit) in highest_difference_report:
             file.write(f"[CASH DEFICIT] DAY: {day}, AMOUNT: {deficit}\n")
@@ -62,7 +85,7 @@ def cashonhand_function():
   
     
 
-
+# please ignore this first
 #def total_difference():
 #    """
 #    - To calculate the difference in cash on hand 
