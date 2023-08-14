@@ -4,7 +4,8 @@ import csv
 # Write a function for cash on hand to be run and called out in mainsolution.py
 # Read the csv file to append days and net profit from the csv.
 def profitloss_function():
-    fp = Path.cwd()/"profit-and-loss.csv" # Create file path to read cash on hand data in csv file
+    fp = Path.cwd()/"csv_reports"/"profit-and-loss.csv" # Create file path to csv folder to read cash
+                                                        # on hand data in csv file
     with fp.open(mode="r",encoding="UTF-8",newline="") as file:
         reader = csv.reader(file)
         next(reader) # Skip header

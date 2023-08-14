@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 import csv
 # Write a function for overhead to be run and called out in mainsolution.py
 def overhead_function(): 
-    fp = Path.cwd()/"Overheads Data.csv" # Create file path to read overheads data in csv file
+    fp = Path.cwd()/"csv_reports"/"Overheads Data.csv" # Create file path to csv folder to read 
+                                                       # overheads data in csv file
     with fp.open(mode="r", encoding="UTF-8", newline="") as file:
         reader = csv.reader(file) 
         next(reader) # skip header 
