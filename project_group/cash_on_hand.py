@@ -73,14 +73,15 @@ def cashonhand_function():
     file_path.touch() # Creates a new file in the file path created to the text document 
     
     with file_path.open(mode = "a", encoding = "UTF-8") as file:
-        # Use mode "a" to append the data at the start of the text file
+        # Use mode "a" to append the data correspondingly into the txt file 
         # Use f-strings in order to append the deficit days and deficit amount in the 
-        # highest_difference_report variable into the text file.     
+        # highest_difference_report variable into the text file.   
+        # Use for loop to loop through all the elements and represent each entry of elements in the list
+        # with day and deficit    
         # Iterate through the elements in the list stored in highest_difference_report variable to get
         # the outputs for deficit days and deficit amount and inculde the USD sign for the
         # cash deficit ouputs 
-        # Use for loop to call out the elements by representing each entry of elements in the list
-        # with day and deficit                          
+                                
         for (day, deficit) in highest_difference_report:
             file.write(f"[CASH DEFICIT] DAY: {day}, AMOUNT: USD{deficit}\n")
     

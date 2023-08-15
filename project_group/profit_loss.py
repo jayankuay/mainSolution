@@ -72,14 +72,15 @@ def profitloss_function():
         file_path.touch() # Creates a new file in the file path created to the text document 
 
         with file_path.open(mode = "a", encoding = "UTF-8") as file:
-            # Use mode "a" to append the data at the start of the text file
+        # Use mode "a" to append the data correspondingly into the txt file 
         # Use f-strings in order to append the loss in profit days and loss in profit amount in the 
-        # profit_loss_report variable into the text file.     
+        # profit_loss_report variable into the text file. 
+        # Use for loop to loop through all the elements and represent each entry of elements in the list
+        # with day and deficit_profit       
         # Iterate through the elements in the list stored in profit_loss_report variable to get
         # the outputs for days experiecing loss in net profit and the loss in profit amount and 
         # inculde the USD sign for the loss in profit amount ouputs 
-        # Use for loop to call out the elements by representing each entry of elements in the list
-        # with day and deficit_profit         
+                
             for (day, deficit_profit) in profit_loss_report:
                 file.write(f"[PROFIT DEFICIT] DAY: {day}, AMOUNT: USD{deficit_profit}\n")
              

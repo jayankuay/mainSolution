@@ -44,7 +44,7 @@ def overhead_function():
     file_path.touch() # Creates a new file in the file path created to the text document
 
     with file_path.open(mode = "a", encoding = "UTF-8") as file: # Use mode "a" to append the data
-                                                                 # at the start of the text file
+                                                                 # correspondingly into the txt file
         # Use f-strings in order to append the stored highest overhead expense and percentage in the 
         # highest_overhead_report variable into the text file.     
         # Iterate through the elements in the list stored in highest_overhead_report variable to get the
